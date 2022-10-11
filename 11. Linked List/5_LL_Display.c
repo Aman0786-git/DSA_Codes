@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 struct Node
 {
@@ -93,14 +94,77 @@ int sum(struct Node *p)
     return x;
 }
 
+int Max(struct Node *p)
+{
+    int max_so_far = INT_MIN;
+    while (p)
+    {
+        if (p->data > max_so_far)
+            max_so_far = p->data;
+
+        p = p->next;
+    }
+    return max_so_far;
+}
+
+int Rmax(struct Node *p)
+{
+    int x = 0;
+    if (p == 0)
+        return INT_MIN;
+
+    x = Rmax(p->next);
+    return x > p->data ? x : p->data;
+}
+
+// Liner Search -> Iterative Version
+struct Node *Lsearch(struct Node *p, int key)
+{
+    while (p != NULL)
+    {
+        struct Node *q;
+        if (key == p->data)
+        {
+            q->next = p->next; // Improving Linear Srch
+            p->next = first;   // Moving to head
+            first = p;         // code
+            return p;
+        }
+        q = p;
+        p = p->next;
+    }
+    return NULL;
+}
+
+// Linear Search
+struct Node *RLsearch(struct Node *p, int key)
+{
+    if (p == NULL)
+        return NULL;
+    if (key == p->data)
+        return p;
+    return RLsearch(p->next, key);
+}
+
 int main()
 {
-    int A[] = {3, 5, 7, 10, 15};
+    int A[] = {3, 5, 7, 10, 15, 8, 12, 2};
 
-    create(A, 5);
+    create(A, 8);
     Display(first);
     // RDisplay(first);
-    printf("\nNumber of Nodes are : %d", count(first));
-    printf("\nSum of Nodes are : %d", sum(first));
+    // printf("\nNumber of Nodes are : %d", count(first));
+    // printf("\nSum of Nodes are : %d", sum(first));
+    // printf("\nMaximum is : %d", max(first));
+    /*  struct Node *temp;
+     temp = Lsearch(first, 2);
+     temp = Lsearch(first, 8);
+     // temp = RLsearch(first, 23);
+     if (temp)
+         printf("\nKey is found %d\n", temp->data);
+     else
+         printf("\nKey Not Found\n");
+
+     Display(first); */
     return 0;
 }
