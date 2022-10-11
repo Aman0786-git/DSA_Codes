@@ -146,12 +146,38 @@ struct Node *RLsearch(struct Node *p, int key)
     return RLsearch(p->next, key);
 }
 
+void Insert(struct Node *p, int index, int x)
+{
+    struct Node *t;
+    int i;
+    if (index < 0 || index > count(p))
+        return;
+    t = (struct Node *)malloc(sizeof(struct Node));
+    t->data = x;
+
+    if (index == 0)
+    {
+        t->next = first;
+        first = t;
+    }
+    else
+    {
+        for (i = 0; i < index - 1 && p; i++)
+            p = p->next;
+
+        t->next = p->next;
+        p->next = t;
+    }
+}
 int main()
 {
     int A[] = {3, 5, 7, 10, 15, 8, 12, 2};
-
     create(A, 8);
-    Display(first);
+
+    /* int A[] = {3, 5, 7};
+    create(A, 3);
+ */
+    // Display(first);
     // RDisplay(first);
     // printf("\nNumber of Nodes are : %d", count(first));
     // printf("\nSum of Nodes are : %d", sum(first));
@@ -166,5 +192,16 @@ int main()
          printf("\nKey Not Found\n");
 
      Display(first); */
+
+    /* Insert(first, 2, 11);
+    printf("\n");
+    Display(first); */
+
+    /* Insert(first, 0, 10);
+    Insert(first, 1, 11);
+    Insert(first, 2, 12);
+    Insert(first, 3, 13);
+    Insert(first, 4, 14); */
+    Display(first);
     return 0;
 }
