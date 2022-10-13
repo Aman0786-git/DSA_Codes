@@ -230,6 +230,37 @@ int Delete(struct Node *p, int index)
     }
 }
 
+int isSorted(struct Node *p)
+{
+    int x = INT_MIN;
+    while (p != NULL)
+    {
+        if (p->data < x)
+            return 0;
+        x = p->data;
+        p = p->next;
+    }
+    return 1;
+}
+
+void removeDuplicate(struct Node *p)
+{
+    struct Node *q = p->next;
+    while (q != NULL)
+    {
+        if (p->data != q->data)
+        {
+            p = q;
+            q = q->next;
+        }
+        else
+        {
+            p->next = q->next;
+            free(q);
+            q = p->next;
+        }
+    }
+}
 int main()
 {
     /* int A[] = {3, 5, 7, 10, 15, 8, 12, 2};
@@ -252,11 +283,11 @@ int main()
      else
          printf("\nKey Not Found\n");
 
-     Display(first); */
+     */
 
     /* Insert(first, 2, 11);
     printf("\n");
-    Display(first); */
+     */
 
     /* Insert(first, 0, 10);
     Insert(first, 1, 11);
@@ -264,13 +295,21 @@ int main()
     Insert(first, 3, 13);
     Insert(first, 4, 14); */
 
-    int A[] = {10, 20, 30, 40, 50};
-    create(A, 5);
-    Display(first);
-    printf("\n\n");
+    int A[] = {10, 20, 20, 20, 30, 40, 50, 50, 50};
+    create(A, 9);
+
     /*  SortedInsert(first, 39);
      SortedInsert(first, 9); */
-    printf("Deleted Element : %d\n", Delete(first, 4));
+    // printf("Deleted Element : %d\n", Delete(first, 4));
+    /*if (isSorted(first))
+        printf("Sorted\n");
+    else
+        printf("Not Sorted\n"); */
+
+    Display(first);
+    printf("\n\n");
+    removeDuplicate(first);
+
     Display(first);
 
     return 0;
