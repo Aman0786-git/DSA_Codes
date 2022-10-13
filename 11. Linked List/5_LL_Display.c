@@ -169,10 +169,71 @@ void Insert(struct Node *p, int index, int x)
         p->next = t;
     }
 }
+
+// Inserting in a sorted Linked List
+void SortedInsert(struct Node *p, int x)
+{
+    struct Node *t, *q = NULL;
+
+    t = (struct Node *)malloc(sizeof(struct Node));
+    t->data = x;
+    t->next = NULL;
+
+    if (first == NULL)
+        first = t;
+    else
+    {
+        while (p && p->data < x)
+        {
+            q = p;
+            p = p->next;
+        }
+        if (p == first)
+        {
+            t->next = first;
+            first = t;
+        }
+        else
+        {
+            t->next = q->next;
+            q->next = t;
+        }
+    }
+}
+
+/// Deleting from a linked list
+int Delete(struct Node *p, int index)
+{
+    struct Node *q;
+    int x = -1, i;
+    if (index < 1 || index > count(p))
+        return -1;
+    if (index == 1)
+    {
+        q = first;
+        x = first->data;
+        first = first->next;
+        free(q);
+        return x;
+    }
+    else
+    {
+        for (i = 0; i < index - 1; i++)
+        {
+            q = p;
+            p = p->next;
+        }
+        q->next = p->next;
+        x = p->data;
+        free(p);
+        return x;
+    }
+}
+
 int main()
 {
-    int A[] = {3, 5, 7, 10, 15, 8, 12, 2};
-    create(A, 8);
+    /* int A[] = {3, 5, 7, 10, 15, 8, 12, 2};
+    create(A, 8); */
 
     /* int A[] = {3, 5, 7};
     create(A, 3);
@@ -202,6 +263,15 @@ int main()
     Insert(first, 2, 12);
     Insert(first, 3, 13);
     Insert(first, 4, 14); */
+
+    int A[] = {10, 20, 30, 40, 50};
+    create(A, 5);
     Display(first);
+    printf("\n\n");
+    /*  SortedInsert(first, 39);
+     SortedInsert(first, 9); */
+    printf("Deleted Element : %d\n", Delete(first, 4));
+    Display(first);
+
     return 0;
 }
