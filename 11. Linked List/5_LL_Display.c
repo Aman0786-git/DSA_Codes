@@ -284,6 +284,20 @@ void Reverse1(struct Node *p)
     }
 }
 
+void Reverse2(struct Node *p)
+{
+    struct Node *q = NULL, *r = NULL;
+
+    while (p != NULL)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    first = q;
+}
+
 int main()
 {
     /* int A[] = {3, 5, 7, 10, 15, 8, 12, 2};
@@ -336,7 +350,8 @@ int main()
     create(A, 5);
     Display(first);
     printf("\n\n");
-    Reverse1(first);
+    // Reverse1(first);
+    Reverse2(first);
     Display(first);
 
     return 0;
