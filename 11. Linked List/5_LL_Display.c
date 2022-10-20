@@ -298,6 +298,18 @@ void Reverse2(struct Node *p)
     first = q;
 }
 
+void Reverse3(struct Node *q, struct Node *p)
+{
+    if (p != NULL)
+    {
+        Reverse3(p, p->next);
+        p->next = q;
+    }
+    else
+    {
+        first = q;
+    }
+}
 int main()
 {
     /* int A[] = {3, 5, 7, 10, 15, 8, 12, 2};
@@ -346,12 +358,14 @@ int main()
     else
         printf("Not Sorted\n"); */
 
-    int A[] = {10, 20, 30, 40, 50};
+    // int A[] = {10, 20, 30, 40, 50};
+    int A[] = {50, 40, 30, 20, 10};
     create(A, 5);
     Display(first);
     printf("\n\n");
     // Reverse1(first);
-    Reverse2(first);
+    // Reverse2(first);
+    Reverse3(NULL, first);
     Display(first);
 
     return 0;
