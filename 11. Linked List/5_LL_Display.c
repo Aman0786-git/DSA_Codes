@@ -261,6 +261,29 @@ void removeDuplicate(struct Node *p)
         }
     }
 }
+
+void Reverse1(struct Node *p)
+{
+    int *A, i = 0;
+    struct Node *q = p;
+    A = (int *)malloc(sizeof(int) * count(p));
+
+    while (q != NULL)
+    {
+        A[i] = q->data;
+        q = q->next;
+        i++;
+    }
+    q = p;
+    i--;
+    while (q != NULL)
+    {
+        q->data = A[i];
+        q = q->next;
+        i--;
+    }
+}
+
 int main()
 {
     /* int A[] = {3, 5, 7, 10, 15, 8, 12, 2};
@@ -295,8 +318,11 @@ int main()
     Insert(first, 3, 13);
     Insert(first, 4, 14); */
 
-    int A[] = {10, 20, 20, 20, 30, 40, 50, 50, 50};
-    create(A, 9);
+    /*  int A[] = {10, 20, 20, 20, 30, 40, 50, 50, 50};
+     create(A, 9);
+     Display(first);
+
+     removeDuplicate(first); */
 
     /*  SortedInsert(first, 39);
      SortedInsert(first, 9); */
@@ -306,10 +332,11 @@ int main()
     else
         printf("Not Sorted\n"); */
 
+    int A[] = {10, 20, 30, 40, 50};
+    create(A, 5);
     Display(first);
     printf("\n\n");
-    removeDuplicate(first);
-
+    Reverse1(first);
     Display(first);
 
     return 0;
