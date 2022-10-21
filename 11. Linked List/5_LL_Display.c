@@ -6,7 +6,7 @@ struct Node
 {
     int data;
     struct Node *next;
-} *first = NULL;
+} *first = NULL, *second = NULL, *third = NULL;
 
 void create(int A[], int n)
 {
@@ -16,6 +16,24 @@ void create(int A[], int n)
     first->data = A[0];
     first->next = NULL;
     last = first;
+
+    for (i = 1; i < n; i++)
+    {
+        t = (struct Node *)malloc(sizeof(struct Node));
+        t->data = A[i];
+        t->next = NULL;
+        last->next = t;
+        last = t;
+    }
+}
+void create2(int A[], int n)
+{
+    int i;
+    struct Node *t, *last;
+    second = (struct Node *)malloc(sizeof(struct Node));
+    second->data = A[0];
+    second->next = NULL;
+    last = second;
 
     for (i = 1; i < n; i++)
     {
@@ -310,6 +328,55 @@ void Reverse3(struct Node *q, struct Node *p)
         first = q;
     }
 }
+
+void Concat(struct Node *p, struct Node *q)
+{
+    third = p;
+    while (p->next != NULL)
+    {
+        p = p->next;
+    }
+    p->next = q;
+}
+
+void Merge(struct Node *p, struct Node *q)
+{
+    struct Node *last;
+    if (p->data < q->data)
+    {
+        third = last = p;
+        p = p->next;
+        third->next = NULL;
+    }
+    else
+    {
+        third = last = q;
+        q = q->next;
+        third->next = NULL;
+    }
+
+    while (p && q)
+    {
+        if (p->data < q->data)
+        {
+            last->next = p;
+            last = p;
+            p = p->next;
+            last->next = NULL;
+        }
+        else
+        {
+            last->next = q;
+            last = q;
+            q = q->next;
+            last->next = NULL;
+        }
+    }
+    if (p)
+        last->next = p;
+    if (q)
+        last->next = q;
+}
 int main()
 {
     /* int A[] = {3, 5, 7, 10, 15, 8, 12, 2};
@@ -359,14 +426,18 @@ int main()
         printf("Not Sorted\n"); */
 
     // int A[] = {10, 20, 30, 40, 50};
-    int A[] = {50, 40, 30, 20, 10};
-    create(A, 5);
-    Display(first);
-    printf("\n\n");
     // Reverse1(first);
     // Reverse2(first);
-    Reverse3(NULL, first);
-    Display(first);
+    // Reverse3(NULL, first);
 
+    int A[] = {10, 20, 20, 40, 50};
+    int B[] = {5, 15, 25, 35, 45};
+    create(A, 5);
+    create2(B, 5);
+    /* Concat(second, first);
+    printf("Concatinated\n");
+    Display(third); */
+    Merge(first, second);
+    Display(third);
     return 0;
 }
