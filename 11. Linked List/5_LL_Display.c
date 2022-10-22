@@ -377,6 +377,21 @@ void Merge(struct Node *p, struct Node *q)
     if (q)
         last->next = q;
 }
+
+int isLoop(struct Node *f)
+{
+    struct Node *p, *q;
+    p = q = f;
+
+    do
+    {
+        p = p->next;
+        q = q->next;
+        q = q ? q->next : p != q;
+    } while (p && q && p != q);
+
+    return p == q ? 1 : 0;
+}
 int main()
 {
     /* int A[] = {3, 5, 7, 10, 15, 8, 12, 2};
@@ -425,19 +440,26 @@ int main()
     else
         printf("Not Sorted\n"); */
 
-    // int A[] = {10, 20, 30, 40, 50};
+    int A[] = {10, 20, 30, 40, 50};
+    create(A, 5);
     // Reverse1(first);
     // Reverse2(first);
     // Reverse3(NULL, first);
 
-    int A[] = {10, 20, 20, 40, 50};
-    int B[] = {5, 15, 25, 35, 45};
-    create(A, 5);
-    create2(B, 5);
+    /*   int A[] = {10, 20, 20, 40, 50};
+      int B[] = {5, 15, 25, 35, 45};
+      create2(B, 5); */
     /* Concat(second, first);
     printf("Concatinated\n");
     Display(third); */
-    Merge(first, second);
-    Display(third);
+    // Merge(first, second);
+    // Display(third);
+
+    struct Node *t1, *t2;
+    t1 = first->next->next;
+    t2 = first->next->next->next->next;
+    t2->next = t1;
+
+    printf("%d\n", isLoop(first));
     return 0;
 }
