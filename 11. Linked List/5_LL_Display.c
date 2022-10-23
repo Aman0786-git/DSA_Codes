@@ -380,6 +380,7 @@ void Merge(struct Node *p, struct Node *q)
 
 int isLoop(struct Node *f)
 {
+
     struct Node *p, *q;
     p = q = f;
 
