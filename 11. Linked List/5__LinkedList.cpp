@@ -127,6 +127,11 @@ int LinkedList::Delete(int index)
 
 int main()
 {
-
+    int A[] = {1, 2, 3, 4, 5};
+    LinkedList l(A, 5);
+    l.Display();
+    l.Insert(3, 90);
+    l.Display();
+    cout << "Length: " << l.Length() << endl;
     return 0;
 }
