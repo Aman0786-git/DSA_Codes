@@ -130,6 +130,7 @@ int main()
     int A[] = {1, 2, 3, 4, 5};
     LinkedList l(A, 5);
     l.Display();
+    cout << "Length: " << l.Length() << endl;
     l.Insert(3, 90);
     l.Display();
     cout << "Length: " << l.Length() << endl;
