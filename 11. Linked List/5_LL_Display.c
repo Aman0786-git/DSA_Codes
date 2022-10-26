@@ -441,13 +441,14 @@ int main()
     else
         printf("Not Sorted\n"); */
 
-    int A[] = {10, 20, 30, 40, 50};
-    create(A, 5);
+    // int A[] = {10, 20, 30, 40, 50};
     // Reverse1(first);
     // Reverse2(first);
     // Reverse3(NULL, first);
 
-    /*   int A[] = {10, 20, 20, 40, 50};
+    int A[] = {10, 20, 20, 40, 50};
+    create(A, 5);
+    /*
       int B[] = {5, 15, 25, 35, 45};
       create2(B, 5); */
     /* Concat(second, first);
