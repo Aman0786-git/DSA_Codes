@@ -43,11 +43,11 @@ void Display(struct Node *p)
 int Length(struct Node *p)
 {
     int len = 0;
-    while (p)
+    do
     {
         len++;
         p = p->next;
-    }
+    } while (p != first);
     return len;
 }
 
@@ -61,12 +61,13 @@ void Insert(struct Node *p, int index, int x)
     {
         t = (struct Node *)malloc(sizeof(struct Node));
         t->data = x;
-        t->prev = NULL;
+        first->prev->next = t;
+        t->prev = first->prev;
         t->next = first;
         first->prev = t;
         first = t;
     }
-    else
+    /* else
     {
         for (i = 0; i < index - 1; i++)
             p = p->next;
@@ -77,7 +78,7 @@ void Insert(struct Node *p, int index, int x)
         if (p->next)
             p->next->prev = t;
         p->next = t;
-    }
+    } */
 }
 
 int main()
@@ -85,5 +86,8 @@ int main()
     int A[] = {10, 20, 30, 40, 50};
     create(A, 5);
     Display(first);
+    Insert(first, 0, 5);
+    Display(first);
+    printf("%d", Length(first));
     return 0;
 }

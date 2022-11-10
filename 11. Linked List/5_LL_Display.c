@@ -388,10 +388,23 @@ int isLoop(struct Node *f)
     {
         p = p->next;
         q = q->next;
-        q = q ? q->next : p != q;
+        q = q ? q->next : p;
     } while (p && q && p != q);
 
     return p == q ? 1 : 0;
+}
+int middleNode(struct Node *p)
+{
+    struct Node *q = first;
+    while (q != NULL)
+    {
+        q = q->next;
+        if (q)
+            q = q->next;
+        if (q)
+            p = p->next;
+    }
+    return p->data;
 }
 int main()
 {
@@ -446,7 +459,7 @@ int main()
     // Reverse2(first);
     // Reverse3(NULL, first);
 
-    int A[] = {10, 20, 20, 40, 50};
+    int A[] = {10, 20, 30, 40, 50};
     create(A, 5);
     /*
       int B[] = {5, 15, 25, 35, 45};
@@ -457,11 +470,13 @@ int main()
     // Merge(first, second);
     // Display(third);
 
-    struct Node *t1, *t2;
-    t1 = first->next->next;
-    t2 = first->next->next->next->next;
-    t2->next = t1;
+    /*  struct Node *t1, *t2;
+     t1 = first->next->next;
+     t2 = first->next->next->next->next;
+     t2->next = t1; */
 
-    printf("%d\n", isLoop(first));
+    // printf("%d\n", isLoop(first));
+    Display(first);
+    printf("\n%d ", middleNode(first));
     return 0;
 }
