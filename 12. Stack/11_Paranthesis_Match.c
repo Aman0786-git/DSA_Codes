@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 struct Node
 {
     char data;
@@ -79,10 +79,90 @@ int isBalanced(char *exp)
     }
     return isEmpty() ? 1 : 0;
 }
+
+int stackTop()
+{
+    if (top == NULL)
+        return -1;
+    else
+        return top->data;
+}
+
+int isAllBalanced(char *exp)
+{
+    int i;
+    for (i = 0; exp[i] != '\0'; i++)
+    {
+        if (exp[i] == 40 || exp[i] == 91 || exp[i] == 123)
+            push(exp[i]);
+        else if (exp[i] == 41 || exp[i] == 93 || exp[i] == 125)
+        {
+            if ((exp[i] > 39 && exp[i] < 42 && exp[i] - stackTop() == 1) || (exp[i] > 90 && exp[i] < 94 && exp[i] - stackTop() == 2) || (exp[i] > 122 && exp[i] < 126 && exp[i] - stackTop() == 2))
+            {
+                if (isEmpty())
+                    return 0;
+                pop();
+            }
+        }
+    }
+    return isEmpty() ? 1 : 0;
+}
+
+int pre(char x)
+{
+    if (x == '+' || x == '-')
+        return 1;
+    else if (x == '/' || x == '*')
+        return 2;
+
+    return 0;
+}
+
+int isOperand(char x)
+{
+    if (x == '+' || x == '-' || x == '*' || x == '/')
+        return 0;
+    else
+        return 1;
+}
+
+char *InToPost(char *infix)
+{
+    int i = 0, j = 0;
+    char *postfix;
+    int len = strlen(infix);
+    postfix = (char *)malloc((len + 2) * sizeof(char));
+
+    while (infix[i] != '\0')
+    {
+        if (isOperand(infix[i]))
+            postfix[j++] = infix[i++];
+        else
+        {
+            if (pre(infix[i]) > pre(top->data))
+                push(infix[i++]);
+            else
+                postfix[j++] = pop();
+        }
+    }
+    while (top != NULL)
+        postfix[j++] = pop();
+    postfix[j] = '\0';
+
+    return postfix;
+}
+
 int main()
 {
-    char *exp = "((a+b)*(c-d))";
+    /* // char *exp = "{([a+b]*[c-d])}";
+    // printf("%d \n", '(');
+    // printf("%d \n", isBalanced(exp));
+    // printf("%d \n", isAllBalanced(exp)); */
 
-    printf("%d ", isBalanced(exp));
+    char *infix = "a+b*c-d/e";
+    push('#');
+    char *postfix = InToPost(infix);
+
+    printf("%s\n", postfix);
     return 0;
 }
