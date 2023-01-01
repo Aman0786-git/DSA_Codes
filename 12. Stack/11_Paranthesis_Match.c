@@ -159,7 +159,7 @@ int main()
     // printf("%d \n", isBalanced(exp));
     // printf("%d \n", isAllBalanced(exp)); */
 
-    char *infix = "a+b*c-d/e";
+    char *infix = "a+b-c*d-e+f/g";
     push('#');
     char *postfix = InToPost(infix);
 
