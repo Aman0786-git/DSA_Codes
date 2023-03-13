@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "btree.h"
+#include "queueC.h"
 
 int isEmpty(struct Queue q)
 {
