@@ -132,6 +132,6 @@ int main()
     t.PreOrder(t.root);
     // t.InOrder(t.root);
     // t.PostOrder(t.root);
-
+    t.LevelOrder(t.root);
     return 0;
 }
