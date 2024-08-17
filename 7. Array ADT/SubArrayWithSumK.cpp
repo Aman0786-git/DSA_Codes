@@ -13,10 +13,11 @@ int findSubArraySum(vector<int>&arr, int n, int k)
 	         if(sum==k)count++;
 	     }
 	     j++;
-
 	 }
-	 return count;*/
+	 return count;
 
+	 */
+// -ve and 0 included
 	map<int, int>mp;
 	mp[0] = 1;
 	int count = 0, sum = 0;
