@@ -11,6 +11,19 @@ cutting in two pieces of lengths 2 and
 6, i.e., 5+17=22.
 
 */
+// using memorization
+int solve(vector<int>&price, int n, int w , vector<vector<int>>&t, vector<int>&len) {
+    if (n == 0 || w == 0)return 0;
+    if (t[n][w] != -1)return t[n][w];
+    if (len[n - 1] <= w) {
+        return max(price[n - 1] + solve(price, n, w - len[n - 1], t, len), solve(price, n - 1, w, t, len));
+    }
+    else
+        return solve(price, n - 1, w, t, len);
+
+}
+
+//using Top-Down DP
 int cutRod(int price[], int n) {
     //code here
     //assigning dp table t with 0th row nd col as 0;
