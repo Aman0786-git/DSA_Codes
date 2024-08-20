@@ -1,4 +1,14 @@
 //Permutaion with Spaces-gfg
+/*
+IP-"ABC"
+OP-"{
+	A B C,
+	A BC,
+	AB C,
+	ABC
+
+}"
+*/
 void solve(string ip, string op, vector<string>&ans) {
 	//getting the ans when ip lenght is 0
 	if (ip.length() == 0) {
